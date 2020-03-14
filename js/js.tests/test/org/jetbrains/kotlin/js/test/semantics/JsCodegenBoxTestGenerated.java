@@ -19291,6 +19291,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
                 runTest("compiler/testData/codegen/box/reflection/callBy/defaultInSuperInterface.kt");
             }
 
+            @TestMetadata("emptyVarArg.kt")
+            public void testEmptyVarArg() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/callBy/emptyVarArg.kt");
+            }
+
             @TestMetadata("extensionFunction.kt")
             public void testExtensionFunction() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/callBy/extensionFunction.kt");
@@ -19486,6 +19491,11 @@ public class JsCodegenBoxTestGenerated extends AbstractJsCodegenBoxTest {
             @TestMetadata("arrayOfKClasses.kt")
             public void testArrayOfKClasses() throws Exception {
                 runTest("compiler/testData/codegen/box/reflection/createAnnotation/arrayOfKClasses.kt");
+            }
+
+            @TestMetadata("callByWithEmptyVarArg.kt")
+            public void testCallByWithEmptyVarArg() throws Exception {
+                runTest("compiler/testData/codegen/box/reflection/createAnnotation/callByWithEmptyVarArg.kt");
             }
 
             @TestMetadata("enumKClassAnnotation.kt")
