@@ -1,0 +1,31 @@
+package
+
+package a {
+
+    package a.b {
+        public fun test(): kotlin.Unit
+
+        public final class BatchInfo1 {
+            public constructor BatchInfo1(/*0*/ batchSize: kotlin.Int)
+            public final val batchSize: kotlin.Int
+            public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+            public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+            public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+        }
+
+        public final class BatchInfo2</*0*/ T> {
+            public constructor BatchInfo2</*0*/ T>(/*0*/ data: T)
+            public final val data: T
+            public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+            public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+            public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+        }
+
+        public object Obj {
+            private constructor Obj()
+            public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+            public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+            public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+        }
+    }
+}
