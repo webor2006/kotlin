@@ -441,7 +441,7 @@ class FirDeclarationsResolveTransformer(transformer: FirBodyResolveTransformer) 
         anonymousInitializer: FirAnonymousInitializer,
         data: ResolutionMode
     ): CompositeTransformResult<FirDeclaration> {
-        if (implicitTypeOnly) return anonymousInitializer.compose()
+//        if (implicitTypeOnly) return anonymousInitializer.compose()
         return withLocalScopeCleanup {
             dataFlowAnalyzer.enterInitBlock(anonymousInitializer)
             addLocalScope(primaryConstructorParametersScope)
