@@ -89,6 +89,14 @@ class FirDeclarationsResolveTransformer(transformer: FirBodyResolveTransformer) 
             property.replaceReturnTypeRef(property.getter.delegate.returnTypeRef)
             return property.compose()
         }
+        if (
+            !property.isLocal &&
+            property.resolvePhase == FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE &&
+            transformerPhase == FirResolvePhase.BODY_RESOLVE
+        ) {
+            property.replaceResolvePhase(transformerPhase)
+            return property.compose()
+        }
         return withTypeParametersOf(property) {
             if (property.isLocal) {
                 prepareSignatureForBodyResolve(property)
@@ -98,12 +106,8 @@ class FirDeclarationsResolveTransformer(transformer: FirBodyResolveTransformer) 
                 return@withTypeParametersOf transformLocalVariable(property)
             }
             val returnTypeRef = property.returnTypeRef
-            if (returnTypeRef !is FirImplicitTypeRef && implicitTypeOnly) return@withTypeParametersOf property.compose()
+//            if (returnTypeRef !is FirImplicitTypeRef && implicitTypeOnly) return@withTypeParametersOf property.compose()
             if (property.resolvePhase == transformerPhase) return@withTypeParametersOf property.compose()
-            if (property.resolvePhase == FirResolvePhase.IMPLICIT_TYPES_BODY_RESOLVE && transformerPhase == FirResolvePhase.BODY_RESOLVE) {
-                property.replaceResolvePhase(transformerPhase)
-                return@withTypeParametersOf property.compose()
-            }
             dataFlowAnalyzer.enterProperty(property)
             withFullBodyResolve {
                 withLocalScopeCleanup {
