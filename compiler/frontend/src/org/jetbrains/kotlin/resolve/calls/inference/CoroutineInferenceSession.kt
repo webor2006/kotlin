@@ -9,8 +9,9 @@ import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.descriptors.impl.LocalVariableDescriptor
-import org.jetbrains.kotlin.psi.KtClassLiteralExpression
+import org.jetbrains.kotlin.psi.KtDoubleColonExpression
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
+import org.jetbrains.kotlin.psi.psiUtil.isAncestor
 import org.jetbrains.kotlin.resolve.BindingTrace
 import org.jetbrains.kotlin.resolve.DescriptorUtils
 import org.jetbrains.kotlin.resolve.MissingSupertypesResolver
@@ -28,7 +29,10 @@ import org.jetbrains.kotlin.resolve.calls.model.*
 import org.jetbrains.kotlin.resolve.calls.tower.*
 import org.jetbrains.kotlin.resolve.calls.util.FakeCallableDescriptorForObject
 import org.jetbrains.kotlin.resolve.deprecation.DeprecationResolver
-import org.jetbrains.kotlin.types.*
+import org.jetbrains.kotlin.types.StubType
+import org.jetbrains.kotlin.types.TypeApproximator
+import org.jetbrains.kotlin.types.TypeConstructor
+import org.jetbrains.kotlin.types.UnwrappedType
 import org.jetbrains.kotlin.types.expressions.DoubleColonExpressionResolver
 import org.jetbrains.kotlin.types.expressions.ExpressionTypingServices
 import org.jetbrains.kotlin.types.typeUtil.contains
@@ -120,14 +124,15 @@ class CoroutineInferenceSession(
         if (descriptor is FakeCallableDescriptorForObject) return true
 
         // In this case temporary trace isn't committed during resolve of expressions like A::class, see resolveDoubleColonLHS
-        if (!DescriptorUtils.isObject(descriptor) && isLHSOfClassLiteralExpression(callInfo)) return true
+        if (!DescriptorUtils.isObject(descriptor) && isInLHSOfDoubleColonExpression(callInfo)) return true
 
         return false
     }
 
-    private fun isLHSOfClassLiteralExpression(callInfo: SingleCallResolutionResult): Boolean {
+    private fun isInLHSOfDoubleColonExpression(callInfo: SingleCallResolutionResult): Boolean {
         val callElement = callInfo.resultCallAtom.atom.psiKotlinCall.psiCall.callElement
-        return callElement.getParentOfType<KtClassLiteralExpression>(strict = false) != null
+        val lhs = callElement.getParentOfType<KtDoubleColonExpression>(strict = false)?.lhs
+        return lhs?.isAncestor(callElement) == true
     }
 
     override fun currentConstraintSystem(): ConstraintStorage {

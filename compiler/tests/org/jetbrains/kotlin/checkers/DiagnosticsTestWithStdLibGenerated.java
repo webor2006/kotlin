@@ -1912,11 +1912,6 @@ public class DiagnosticsTestWithStdLibGenerated extends AbstractDiagnosticsTestW
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/chainCallWithExtensionExplicitTypes.kt");
             }
 
-            @TestMetadata("classLiteralToClassWithParameters.kt")
-            public void testClassLiteralToClassWithParameters() throws Exception {
-                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/classLiteralToClassWithParameters.kt");
-            }
-
             @TestMetadata("coroutineInferenceWithCapturedTypeVariable.kt")
             public void testCoroutineInferenceWithCapturedTypeVariable() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/coroutineInferenceWithCapturedTypeVariable.kt");
@@ -1925,6 +1920,11 @@ public class DiagnosticsTestWithStdLibGenerated extends AbstractDiagnosticsTestW
             @TestMetadata("correctMember.kt")
             public void testCorrectMember() throws Exception {
                 runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/correctMember.kt");
+            }
+
+            @TestMetadata("doubleColonExpressionToClassWithParameters.kt")
+            public void testDoubleColonExpressionToClassWithParameters() throws Exception {
+                runTest("compiler/testData/diagnostics/testsWithStdLib/coroutines/inference/doubleColonExpressionToClassWithParameters.kt");
             }
 
             @TestMetadata("elvisOperatorAgainstFlexibleType.kt")

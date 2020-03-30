@@ -12,5 +12,8 @@ fun test() {
         val x = BatchInfo1::class
         val y = a.b.BatchInfo1::class
         val z = Obj::class
+
+        val x1 = BatchInfo1::batchSize
+        val y1 = a.b.BatchInfo1::class
     }
 }
