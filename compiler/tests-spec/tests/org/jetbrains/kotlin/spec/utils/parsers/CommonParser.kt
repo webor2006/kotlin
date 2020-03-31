@@ -144,18 +144,13 @@ object CommonParser {
                 "Unknown '$testInfoOriginalElementName' test info element name."
             )
             val testInfoElementValue: String?
-            if (testInfoOriginalElementName == "RELEVANT PLACES") {
+            testInfoElementValue = if (testInfoOriginalElementName == "RELEVANT PLACES") {
                 val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlaces.matcher(rawElements)
                 if (relevantPlacesMatcher.find()) {
-                    testInfoElementValue = relevantPlacesMatcher.group("places")/*.replace(Regex("""[ ]*\*[ ]*"""), "")*/
-/*                    val placesMatcher = LinkedSpecTestPatterns.placePattern.matcher(testInfoElementValue)
-
-                    while (placesMatcher.find()) {
-                        println(placesMatcher.group("paragraphNumber"))
-                    }*/
-                } else throw Exception("incorrect relevant link :(")
+                    relevantPlacesMatcher.group("places")
+                } else throw Exception("Relevant link is incorrect")
             } else {
-                testInfoElementValue = testInfoElementMatcher.group("value")
+                testInfoElementMatcher.group("value")
             }
             val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)
 
@@ -167,7 +162,6 @@ object CommonParser {
 
             testInfoElementsMap[testInfoElementName] =
                 SpecTestInfoElementContent(testInfoElementValue ?: "", testInfoElementValueMatcher)
-
         }
 
         rules.forEach {
