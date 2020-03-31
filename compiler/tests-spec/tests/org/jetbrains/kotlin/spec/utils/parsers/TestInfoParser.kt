@@ -64,7 +64,8 @@ private fun parseTestInfo(testFilePath: String, testFiles: TestFiles, linkedTest
 
 fun tryParseTestInfo(testFilePath: String, testFiles: TestFiles, linkedTestType: SpecTestLinkedType): ParsedTestFile {
     try {
-        return parseTestInfo(testFilePath, testFiles, linkedTestType)
+        val x = parseTestInfo(testFilePath, testFiles, linkedTestType)
+        return x
     } catch (e: Exception) {
         error("Wrong format of file:\nfile://$testFilePath \n${e.message}")
     }

@@ -143,6 +143,16 @@ object CommonParser {
                 SpecTestValidationFailedReason.TESTINFO_NOT_VALID,
                 "Unknown '$testInfoOriginalElementName' test info element name."
             )
+            if (testInfoOriginalElementName == "RELEVANT PLACES"){
+//               val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlacesPattern.matcher(rawElements)
+               val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlaces.matcher(rawElements)
+             //   relevantPlacesMatcher.replaceFirst("")
+                while (relevantPlacesMatcher.find())
+                {
+                    println(relevantPlacesMatcher.group("places"))
+                }
+
+            }
             val testInfoElementValue = testInfoElementMatcher.group("value")
             val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)
 
