@@ -9,7 +9,9 @@ import org.jetbrains.kotlin.builtins.KotlinBuiltIns
 import org.jetbrains.kotlin.descriptors.CallableDescriptor
 import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 import org.jetbrains.kotlin.descriptors.impl.LocalVariableDescriptor
+import org.jetbrains.kotlin.psi.KtDotQualifiedExpression
 import org.jetbrains.kotlin.psi.KtDoubleColonExpression
+import org.jetbrains.kotlin.psi.KtReferenceExpression
 import org.jetbrains.kotlin.psi.psiUtil.getParentOfType
 import org.jetbrains.kotlin.psi.psiUtil.isAncestor
 import org.jetbrains.kotlin.resolve.BindingTrace
@@ -132,7 +134,9 @@ class CoroutineInferenceSession(
     private fun isInLHSOfDoubleColonExpression(callInfo: SingleCallResolutionResult): Boolean {
         val callElement = callInfo.resultCallAtom.atom.psiKotlinCall.psiCall.callElement
         val lhs = callElement.getParentOfType<KtDoubleColonExpression>(strict = false)?.lhs
-        return lhs?.isAncestor(callElement) == true
+        if (lhs !is KtReferenceExpression && lhs !is KtDotQualifiedExpression) return false
+
+        return lhs.isAncestor(callElement)
     }
 
     override fun currentConstraintSystem(): ConstraintStorage {

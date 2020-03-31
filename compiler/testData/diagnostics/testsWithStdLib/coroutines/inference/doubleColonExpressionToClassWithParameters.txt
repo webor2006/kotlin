@@ -3,7 +3,10 @@ package
 package a {
 
     package a.b {
-        public fun test(): kotlin.Unit
+        public val test2: kotlin.String
+        public val test3: kotlin.String
+        public fun </*0*/ S> generate(/*0*/ @kotlin.BuilderInference g: a.b.Scope<S>.() -> kotlin.Unit): S
+        public fun test1(): kotlin.Unit
 
         public final class BatchInfo1 {
             public constructor BatchInfo1(/*0*/ batchSize: kotlin.Int)
@@ -26,6 +29,13 @@ package a {
             public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
             public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
             public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+        }
+
+        public interface Scope</*0*/ T> {
+            public open override /*1*/ /*fake_override*/ fun equals(/*0*/ other: kotlin.Any?): kotlin.Boolean
+            public open override /*1*/ /*fake_override*/ fun hashCode(): kotlin.Int
+            public open override /*1*/ /*fake_override*/ fun toString(): kotlin.String
+            public open fun yield(/*0*/ t: T): kotlin.Unit
         }
     }
 }
