@@ -17,18 +17,18 @@ import java.util.regex.Pattern
 typealias SpecTestInfoElements<T> = Map<T, SpecTestInfoElementContent>
 
 enum class CommonInfoElementType(
-    override val valuePattern: Pattern? = null,
+    override val sentenceLinkPattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
     UNEXPECTED_BEHAVIOUR,
-    ISSUES(valuePattern = issuesPattern),
+    ISSUES(sentenceLinkPattern = issuesPattern),
     DISCUSSION,
     NOTE,
     EXCEPTION
 }
 
 enum class CommonSpecTestFileInfoElementType(
-    override val valuePattern: Pattern? = null,
+    override val sentenceLinkPattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
     NUMBER(required = true),
@@ -37,11 +37,11 @@ enum class CommonSpecTestFileInfoElementType(
 }
 
 enum class SpecTestCaseInfoElementType(
-    override val valuePattern: Pattern? = null,
+    override val sentenceLinkPattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
-    TESTCASE_NUMBER(valuePattern = testCaseNumberPattern, required = true),
-    RELEVANT_PLACES(valuePattern = relevantPlacesPattern),
+    TESTCASE_NUMBER(sentenceLinkPattern = testCaseNumberPattern, required = true),
+    RELEVANT_PLACES(sentenceLinkPattern = relevantPlacesPattern),
     UNSPECIFIED_BEHAVIOR
 }
 

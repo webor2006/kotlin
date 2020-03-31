@@ -61,7 +61,7 @@ enum class SpecTestLinkedType(
 }
 
 interface SpecTestInfoElementType {
-    val valuePattern: Pattern?
+    val sentenceLinkPattern: Pattern?
     val required: Boolean
 }
 

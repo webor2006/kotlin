@@ -19,10 +19,10 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 enum class NotLinkedSpecTestFileInfoElementType(
-    override val valuePattern: Pattern? = null,
+    override val sentenceLinkPattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
-    SECTIONS(valuePattern = sectionsInFilePattern, required = true)
+    SECTIONS(sentenceLinkPattern = sectionsInFilePattern, required = true)
 }
 
 class NotLinkedSpecTest(

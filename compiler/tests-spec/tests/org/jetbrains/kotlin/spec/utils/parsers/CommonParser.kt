@@ -143,21 +143,21 @@ object CommonParser {
                 SpecTestValidationFailedReason.TESTINFO_NOT_VALID,
                 "Unknown '$testInfoOriginalElementName' test info element name."
             )
-            if (testInfoOriginalElementName == "RELEVANT PLACES"){
-//               val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlacesPattern.matcher(rawElements)
-               val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlaces.matcher(rawElements)
-             //   relevantPlacesMatcher.replaceFirst("")
+            val testInfoElementValue: String?
+            if (testInfoOriginalElementName == "RELEVANT PLACES") {
+                val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlaces.matcher(rawElements)
                 if (relevantPlacesMatcher.find()) {
-                    val relevantPlaces: String = relevantPlacesMatcher.group("places").replace(Regex("""[ ]*\*[ ]*"""), "")
-                val placesMatcher = LinkedSpecTestPatterns.placePattern.matcher(relevantPlaces)
+                    testInfoElementValue = relevantPlacesMatcher.group("places")/*.replace(Regex("""[ ]*\*[ ]*"""), "")*/
+/*                    val placesMatcher = LinkedSpecTestPatterns.placePattern.matcher(testInfoElementValue)
 
-                    while(placesMatcher.find()){
+                    while (placesMatcher.find()) {
                         println(placesMatcher.group("paragraphNumber"))
-                    }
-                }
+                    }*/
+                } else throw Exception("incorrect relevant link :(")
+            } else {
+                testInfoElementValue = testInfoElementMatcher.group("value")
             }
-            val testInfoElementValue = testInfoElementMatcher.group("value")
-            val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)
+            val testInfoElementValueMatcher = testInfoElementName.sentenceLinkPattern?.matcher(testInfoElementValue)
 
             if (testInfoElementValueMatcher != null && !testInfoElementValueMatcher.find())
                 throw SpecTestValidationException(
@@ -166,7 +166,8 @@ object CommonParser {
                 )
 
             testInfoElementsMap[testInfoElementName] =
-                    SpecTestInfoElementContent(testInfoElementValue ?: "", testInfoElementValueMatcher)
+                SpecTestInfoElementContent(testInfoElementValue ?: "", testInfoElementValueMatcher)
+
         }
 
         rules.forEach {
