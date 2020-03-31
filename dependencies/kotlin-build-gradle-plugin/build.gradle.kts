@@ -23,6 +23,10 @@ tasks {
     }
 }
 
+java {
+    withSourcesJar()
+}
+
 sourceSets {
     main {
         java.setSrcDirs(listOf("src"))
