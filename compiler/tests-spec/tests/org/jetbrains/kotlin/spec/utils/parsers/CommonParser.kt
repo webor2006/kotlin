@@ -147,11 +147,14 @@ object CommonParser {
 //               val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlacesPattern.matcher(rawElements)
                val relevantPlacesMatcher = LinkedSpecTestPatterns.relevantPlaces.matcher(rawElements)
              //   relevantPlacesMatcher.replaceFirst("")
-                while (relevantPlacesMatcher.find())
-                {
-                    println(relevantPlacesMatcher.group("places"))
-                }
+                if (relevantPlacesMatcher.find()) {
+                    val relevantPlaces: String = relevantPlacesMatcher.group("places").replace(Regex("""[ ]*\*[ ]*"""), "")
+                val placesMatcher = LinkedSpecTestPatterns.placePattern.matcher(relevantPlaces)
 
+                    while(placesMatcher.find()){
+                        println(placesMatcher.group("paragraphNumber"))
+                    }
+                }
             }
             val testInfoElementValue = testInfoElementMatcher.group("value")
             val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)

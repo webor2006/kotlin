@@ -81,9 +81,9 @@ object LinkedSpecTestPatterns : BasePatterns {
         Pattern.compile("""(( $ASTERISK_REGEX )?\s*((?<sections>$SECTIONS_IN_FILE_REGEX) -> )?(paragraph (?<paragraphNumber>$INTEGER_REGEX) -> )?sentence (?<sentenceNumber>$INTEGER_REGEX))+""")
 
  val relevantPlaceRegex =
-        Regex("""(( $ASTERISK_REGEX )?\s*($SECTIONS_IN_FILE_REGEX -> )?(paragraph $INTEGER_REGEX -> )?sentence $INTEGER_REGEX\n)+""")
+        Regex("""(( $ASTERISK_REGEX )?\s*($SECTIONS_IN_FILE_REGEX -> )?(paragraph $INTEGER_REGEX -> )?sentence $INTEGER_REGEX\n)""")
 
-    val relevantPlaces = Pattern.compile("""RELEVANT PLACES: (?<places>${relevantPlaceRegex})""")
+    val relevantPlaces = Pattern.compile("""RELEVANT PLACES: (?<places>(${relevantPlaceRegex})+)""")
 }
 
 object TestCasePatterns {
