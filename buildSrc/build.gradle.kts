@@ -20,10 +20,11 @@ buildscript {
         project.bootstrapKotlinRepo?.let {
             maven(url = it)
         }
+        mavenLocal()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.16")
+        classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.17-dev")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${project.bootstrapKotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-sam-with-receiver:${project.bootstrapKotlinVersion}")
     }
@@ -90,11 +91,12 @@ repositories {
     extra["bootstrapKotlinRepo"]?.let {
         maven(url = it)
     }
+    mavenLocal()
 }
 
 dependencies {
     implementation(kotlin("stdlib", embeddedKotlinVersion))
-    implementation("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.16")
+    implementation("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.17-dev")
 
     implementation("net.rubygrapefruit:native-platform:${property("versions.native-platform")}")
     implementation("net.rubygrapefruit:native-platform-windows-amd64:${property("versions.native-platform")}")

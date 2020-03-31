@@ -18,9 +18,10 @@ buildscript {
         } else {
             maven { url "https://kotlin.bintray.com/kotlin-dependencies" }
         }
+        mavenLocal()
     }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.16")
+        classpath("org.jetbrains.kotlin:kotlin-build-gradle-plugin:0.0.17-dev")
     }
 }
 
