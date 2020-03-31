@@ -20,12 +20,12 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 enum class LinkedSpecTestFileInfoElementType(
-    override val sentenceLinkPattern: Pattern? = null,
+    override val valuePattern: Pattern? = null,
     override val required: Boolean = false
 ) : SpecTestInfoElementType {
     SPEC_VERSION(required = true),
-    PLACE(sentenceLinkPattern = placePattern, required = true),
-    RELEVANT_PLACES(sentenceLinkPattern = relevantPlacesPattern),
+    PLACE(valuePattern = placePattern, required = true),
+    RELEVANT_PLACES(valuePattern = relevantPlacesPattern),
     UNSPECIFIED_BEHAVIOR
 }
 

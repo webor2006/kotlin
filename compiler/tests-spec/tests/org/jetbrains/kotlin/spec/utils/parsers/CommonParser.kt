@@ -157,7 +157,7 @@ object CommonParser {
             } else {
                 testInfoElementValue = testInfoElementMatcher.group("value")
             }
-            val testInfoElementValueMatcher = testInfoElementName.sentenceLinkPattern?.matcher(testInfoElementValue)
+            val testInfoElementValueMatcher = testInfoElementName.valuePattern?.matcher(testInfoElementValue)
 
             if (testInfoElementValueMatcher != null && !testInfoElementValueMatcher.find())
                 throw SpecTestValidationException(
